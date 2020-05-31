@@ -1,0 +1,26 @@
+name: deploy with surge
+
+on:
+  push:
+    branches: [ master ]
+ 
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: setup node
+      uses: action/setup-node@v2-beta
+      with:
+        node-version: "12"
+    - name: setup surge
+      run: npm install -g surge
+    - name: excute surge
+      run: surge ./ http://pakbootcamp-class1.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
+      run: |
+        docker run \
+        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
+        jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
