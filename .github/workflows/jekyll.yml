@@ -20,7 +20,4 @@ jobs:
       run: npm install -g surge
     - name: excute surge
       run: surge ./ http://pakbootcamp-class1.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
-      run: |
-        docker run \
-        -v ${{ github.workspace }}:/srv/jekyll -v ${{ github.workspace }}/_site:/srv/jekyll/_site \
-        jekyll/builder:latest /bin/bash -c "chmod 777 /srv/jekyll && jekyll build --future"
+
