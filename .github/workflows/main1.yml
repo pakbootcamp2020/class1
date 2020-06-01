@@ -27,4 +27,6 @@ jobs:
     # Runs a single command using the runners shell
     - name: install surge
       run: npm install -g surge 
+    - name: execute
+      run: surge ./ http://pakbootcamp-class1.surge.sh/ --token ${{secrets.SURGE_TOKEN}}
 
